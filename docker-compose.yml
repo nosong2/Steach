@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  backend:
+    image: ${BACKEND_IMAGE}
+    container_name: backend
+    environment:
+      - ENABLE_BACKEND=${ENABLE_BACKEND}
+    ports:
+      - "8080:8080"
+    entrypoint: >
+      sh -c 'if [ "$ENABLE_BACKEND" = "true" ]; then exec java -jar app.jar; else echo "Backend Container Operation is Failed"; fi'
+
+  frontend:
+    image: ${FRONTEND_IMAGE}
+    container_name: frontend
+    environment:
+      - ENABLE_FRONTEND=${ENABLE_FRONTEND}
+    ports:
+      - "5173:5173"
+    entrypoint: >
+      sh -c 'if [ "$ENABLE_FRONTEND" = "true" ]; then exec npm run dev -- --host; else echo "Frontend Container Operation is Failed"; fi'
+
+  ai:
+    image: ${AI_IMAGE}
+    container_name: ai
+    environment:
+      - ENABLE_AI=${ENABLE_AI}
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+    ports:
+      - "3000:5000"
+    entrypoint: >
+      sh -c 'if [ "$ENABLE_AI" = "true" ]; then exec flask run --host=0.0.0.0 --port=5000; else echo "AI Container Operation is Failed"; fi'

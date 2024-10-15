@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:mariadb://steach.ssafy.io:13306/test_db
+    username: root
+    password: whtlgus
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+  data:
+    mongodb:
+      uri: mongodb://root:whtlgus@steach.ssafy.io:37017/test_mongo_db?authSource=admin
+#         name://username:password@host:port/database?authentication-database: admin
+    redis:
+      url: redis://steach.ssafy.io:16379
+      host: 43.202.1.52
+      port: 16379
+    
+logging:
+  level:
+    root: INFO
+    org.springframework: WARN
+    org.hibernate: WARN
+    com.twentyone.steachserver: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"

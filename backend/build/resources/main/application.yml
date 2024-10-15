@@ -1,0 +1,49 @@
+spring:
+  config:
+    import:
+      - optional:classpath:application-jwt.yml
+      - optional:classpath:application-key.yml
+
+
+
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://stg-yswa-kr-practice-db-master.mariadb.database.azure.com:3306/S11P11D201?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    username: S11P11D201@stg-yswa-kr-practice-db-master.mariadb.database.azure.com
+    password: enlwlrpgkwk
+    hikari:
+      connection-test-query: SELECT 1 # 연결이 유효한지 주기적으로 확인
+      minimum-idle: 5  # 최소 유휴 연결 수
+      maximum-pool-size: 15  # 최대 연결 풀 크기
+      idle-timeout: 600000  # 10분, 유휴 연결 타임아웃
+      connection-timeout: 30000  # 30초, 연결 타임아웃
+      max-lifetime: 1800000  # 30분, 연결 수명
+      pool-name: HikariPool-1  # 연결 풀 이름
+    tomcat:
+      max-active: 10
+      initial-size: 2
+      max-idle: 2
+      min-idle: 1
+      test-while-idle: true
+      time-between-eviction-runs-millis: 2600000
+      min-evictable-idle-time-millis: 7200000
+      test-on-borrow: true
+      validation-query: 'SELECT 1'
+      
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: true
+      
+  data:
+    mongodb:
+      uri: mongodb+srv://S11P12D201:gnghldjqtdlgkwk@ssafy.ngivl.mongodb.net/S11P12D201?authSource=admin
+#         name://username:password@host:port/database?authentication-database: admin
+    redis:
+      url: redis://steach.ssafy.io:6379
+      host: 43.202.1.52
+      port: 6379
+    
+file:
+  upload-dir: ./uploadTeacherFile

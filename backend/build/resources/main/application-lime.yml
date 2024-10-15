@@ -1,0 +1,27 @@
+spring:
+  config:
+    import:
+      - optional:classpath:application-jwt.yml
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/S11P11D201?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    username: S11P11D201
+    password: enlwlrpgkwk
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: true
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+
+file:
+  upload-dir: ./uploadTeacherFile
+
+jwt:
+  secretKey: "26462948404D635166546A576E5A7234753778214125442A472D4B614E645267"
+  expirationHours: 24
+  issuer: 2ne1
